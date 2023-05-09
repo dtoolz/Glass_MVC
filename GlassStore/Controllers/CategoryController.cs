@@ -24,6 +24,10 @@ namespace GlassStore.Controllers
         [HttpPost]
         public IActionResult Create(Category obj) 
         {
+            if(obj.Name == obj.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("name", "The display order and name cannot be the same");
+            }
             if (ModelState.IsValid)
             {
                 _db.Categories.Add(obj);
